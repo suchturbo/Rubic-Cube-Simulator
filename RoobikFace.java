@@ -34,16 +34,11 @@ public class RoobikFace
     public void setData(String _color){
         this.cellcolor[4] = _color;
     }
-    //method for clockwise 
+    //method for counterclockwise (cell 2 moves to cell 0) 
     //reasssigning values to all faces
-     public void changeFaceCW()    
+     public void changeFaceCCW()    
     {   
         int i;
-        System.out.println("Input face :");
-        for(i=0; i <9; i++){
-            System.out.print(cellcolor[i].toString() + ",");
-        } 
-        System.out.println("");
         String temp0 = cellcolor[0];
         String temp1 = cellcolor[1];
         String temp3 = cellcolor[3];
@@ -57,23 +52,13 @@ public class RoobikFace
         cellcolor[6] = temp0;
         cellcolor[7] = temp3;
         cellcolor[8] = temp6;
-        System.out.println("output face :");
-        for(i=0; i <9; i++){
-            System.out.print(cellcolor[i].toString() + ",");
-        } 
-        System.out.println("");
         
     }
      //method for counterclockwise 
     //reasssigning values to all faces
-    public void changeFaceCCW()    
+    public void changeFaceCW()    
     {   
        int i;
-       System.out.println("Input face :");
-        for(i=0; i <9; i++){
-            System.out.print(cellcolor[i].toString() + ",");
-        } 
-        System.out.println("");
         
         String temp0 = cellcolor[0];
         String temp1 = cellcolor[1];
@@ -88,11 +73,6 @@ public class RoobikFace
         cellcolor[6] = cellcolor[8];
         cellcolor[7] = temp5;
         cellcolor[8] = temp2;
-        System.out.println("output face :");
-        for(i=0; i <9; i++){
-            System.out.print(cellcolor[i].toString() + ",");
-        } 
-        System.out.println("");
     }
 
     

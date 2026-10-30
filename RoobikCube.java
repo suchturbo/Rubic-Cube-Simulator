@@ -20,48 +20,44 @@ public class RoobikCube {
    //everything shifts 1 to the right but value 0 and 4 stay the same
     public void goRight( )
     {
-        RoobikFace original = new RoobikFace(faces[1].toString());
+        RoobikFace original = faces[1];
         faces[1] = faces[2];
         faces[2] = faces[3];
         faces[3] = faces[5];
         faces[5] = original;
-        printRubicCube();
     }
    
    //everything shifts 1 to the left but value 0 and 4 stay the same
 
     public void goLeft()
     {
-        RoobikFace original = new RoobikFace(faces[5].toString());
-        faces[5]= faces[1];
-        faces[1] = faces[2];
-        faces[2] = faces[3];
-        faces[3] = original;
-        printRubicCube();
- }
+        RoobikFace original = faces[5];
+        faces[5] = faces[3];
+        faces[3] = faces[2];
+        faces[2] = faces[1];
+        faces[1] = original;
+    }
   
   //everything shifts 1 to the right but value 3 and 4 stay the same
 
     public void goUp()
     {
-        RoobikFace original = new RoobikFace(faces[0].toString());
+        RoobikFace original = faces[0];
         faces[0]= faces[2];
         faces[2] = faces[4] ;
         faces[4] = faces[5];
         faces[5] = original;
-        printRubicCube();
     }
    
    //everything shifts 1 to the right but value 1 and 3 stay the same
 
     public void goDown()
     {
-        RoobikFace original = new RoobikFace(faces[5].toString());
+        RoobikFace original = faces[5];
         faces[5] = faces[4];
         faces[4] = faces[2] ;
         faces[2] = faces[0];
         faces[0] = original;
-        printRubicCube();
     }
    //Shift clockwise one Row
    //calling CW from ROOBIK FACE
@@ -77,62 +73,27 @@ public class RoobikCube {
          this.faces[faceID].changeFaceCCW();
     }
     
-        /*
-         * Print one face at a time.
-         * first parameter tells the method if tabs are needed or not
-         * second parameter tells the starting face ID
-         * third parameter tells number of faces to print.
-         */
-    public void printRubicfacematrix(boolean initaltab, int startfaceid, int howmany)
+    /*
+     * Print a row of faces side by side.
+     * initialTab indents single faces so they line up over the middle one.
+     */
+    public void printRubicfacematrix(boolean initialTab, int startFaceId, int howMany)
     {
-        //prints out 3 x3 array with randomizer
-      
-        String outputString = "";
-     
-        int i=0, j=0;
-        if(initaltab ==true)
-             outputString += "\t";
-        for (j=0; j<3; j++) {
-     
-            for(i=startfaceid; i <(startfaceid+howmany); i++)
-            {
-                outputString = outputString + this.faces[i].toString(j) +" ";
+        StringBuilder out = new StringBuilder();
+        for (int row = 0; row < 3; row++) {
+            if (initialTab)
+                out.append("\t");
+            for (int f = startFaceId; f < startFaceId + howMany; f++) {
+                for (int col = 0; col < 3; col++)
+                    out.append(this.faces[f].toString(row * 3 + col)).append(" ");
+                if (howMany > 1)
+                    out.append("\t");
             }
-            if(howmany >1)
-                outputString += "\t";
+            out.append("\n");
         }
-            outputString = outputString + "\n";
-            if(initaltab ==true)
-             outputString += "\t";
-
-        for (j=3; j<6; j++) {
-     
-            for(i=startfaceid; i <(startfaceid+howmany); i++)
-            {
-                outputString = outputString + this.faces[startfaceid].toString(i) +" ";
-            }
-                        if(howmany >1)
-                outputString += "\t";
-        }
-        outputString = outputString + "\n";
-        if(initaltab ==true)
-             outputString += "\t";
-
-        for (j=6; j<9; j++) {
-     
-            for(i=startfaceid; i <(startfaceid+howmany); i++)
-            {
-    
-                outputString = outputString + this.faces[startfaceid].toString(i) +" ";
-            }   
-            if(howmany >1)
-                outputString += "\t";
-        }
-     
-        System.out.print(outputString);
+        System.out.print(out);
     }
-    
-        
+
     /** 
      * @return Prints the cube faces in the format needed.
      */
@@ -141,14 +102,14 @@ public class RoobikCube {
        int i, j;
        
        printRubicfacematrix(true,0, 1); //Print face 0
-        System.out.println( "\n");
+        System.out.println();
         printRubicfacematrix(false,1, 3 ); //print face 1,2,3 in same line.
-         System.out.println( "\n");
+         System.out.println();
         printRubicfacematrix(true,4, 1); //Print face 4
-        System.out.println( "\n");
+        System.out.println();
          printRubicfacematrix(true,5, 1); //Print face 5
          //Print face 6 in new line.
-         System.out.println( "\n");
+         System.out.println();
   
         return ;
     }
